@@ -20,7 +20,7 @@
 <img src="./Images/Fulton-Atlanta Beltline Visual.png" width="300">
 
 ### Example simulation GIF:
-- <img src="./Images/StreamlinedSimulationGif.gif" width="300">
+- **TODO: INPUT EXAMPLE GIF**<img src="./Images/StreamlinedSimulationGif.gif" width="300">
 
 ## Setup
 
