@@ -1,5 +1,35 @@
 # config.py
 
+""" Simulation Parameters """
+RHO_L = [2, 4, 8] # House capacity                                             # [1, 2, 4, 8] rho (house capacity)
+ALPHA_L = [0.25, 0.75] # Prioritize proximity vs. community    # [0.25, 0.75] lambda (agent preference; proximity vs. community)
+T_MAX_RANGE = 10000 # Total timesteps                               [20000] 
+NUM_AGENTS = 1000 # Number of agents
+HIGH_BLSCORE_METERS = 1000
+LOW_BLSCORE_METERS = 5000
+BENCHMARK_INTERVALS = 500 # Intervals (# timesteps) to capture frames of GIF
+
+
+
+# Census data:
+# [Median Income]: https://data.census.gov/table/ACSST5Y2010.S1903?q=s1903%202010&g=050XX00US13089$1400000,13121$1400000
+# [Population]: https://data.census.gov/table/ACSDT5Y2022.B01003?q=B01003&g=050XX00US13089$1400000,13121$1400000
+
+
+
+
+
+
+
+
+
+
+
+
+# =======================
+# DO NOT EDIT BELOW [!!!]
+# =======================
+
 # Layer handling
 # https://www.census.gov/cgi-bin/geo/shapefiles/index.php
 ZIP_URLS = [
@@ -71,26 +101,17 @@ AMENITY_TAGS = {
     'shop': 'supermarket',
     'tourism': ['museum', 'hotel'],
     'building': ['apartments', 'house', 'service'],
-    'landuse': ['residential', 'industrial'],
+    'landuse': ['residential', 'industrial']
 }
 
-""" Simulation Parameters """
-RHO_L = [16] # House capacity                                             # [1, 2, 4, 8] rho (house capacity)
-ALPHA_L = [0.25, 0.75] # Prioritize proximity vs. community    # [0.25, 0.75] lambda (agent preference; proximity vs. community)
 EPSILON = 1e-3 # Rate of learning
-T_MAX_RANGE = 10 # Total timesteps                               [20000] 
-BENCHMARK_INTERVALS = 5 # Benchmark interval
-NUM_AGENTS = 11 # Number of agents
-
-HIGH_BLSCORE_METERS = 1000
-LOW_BLSCORE_METERS = 5000
 
 """ Flags """
-RUN_EXPERIMENTS = False  # RUN SIMULATION?
+RUN_EXPERIMENTS = True  # RUN SIMULATION?
 RUN_CALIBRATION = False # RUN CALIBRATION?
 PLOT_CITIES = True      # PLOT SIMULATION?
 PLOT_FOLIUM = False        # Create Folium graph of t_max?
-viewData = True        # View GDF info + more?
+viewData = False        # View GDF info + more?
 viewAmenityData = False # View amenity counts?
 
 """ Visualization Settings """
