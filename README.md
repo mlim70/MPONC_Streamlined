@@ -25,8 +25,8 @@
 ## Setup
 
 ```bash
-cd modeling_processes_of_neighborhood_change_new
-conda create -n mponc python=3.12
+cd MPONC_Streamlined
+conda create -n mponc python=3.10.16
 conda activate mponc
 pip install -r requirements.txt
 python main.py
