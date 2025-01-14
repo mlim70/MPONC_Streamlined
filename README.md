@@ -45,6 +45,7 @@ python main.py
 - How much agents prioritize **proximity** (distance) to another centroid VS. **community** (how similar their income is to a region's average income).
   - Note: A sense of 'community' is measured by how similar their socioeconomic status (income) is to their region.
 > **RHO_L** and **ALPHA_L** are both arrays; you can enter multiple values in each to run multiple simulations *simultaneously*.
+> 
 > Ex. RHO_L = [2, 4]; ALPHA_L = [0.25, 0.75] will run four simulations with rho=2 alpha=0.25, rho=2 alpha=0.75; rho=4 alpha=0.25; and rho=4 alpha=0.75.
 <hr>
 
