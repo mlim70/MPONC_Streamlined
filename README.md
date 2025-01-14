@@ -42,7 +42,7 @@ python main.py
 - Population capacity
   - It's possible that this capacity be exceeded; however, cost is then maximized.
 #### ALPHA_L
-- How much agents prioritize **proximity** score (distance) to another centroid VS. **community** score.
+- How much agents prioritize **proximity** score (distance) VS. **community** score (socioeconomic belonging).
   - Note: A region's '_proximity_' score is higher if it's close by; '_community_' score increases if an agent's income is similar to a region's average income.
   - *Fun fact: Agents are assigned a random *income* based on the actual median incomes throughout Fulton and Dekalb counties !*
 > **RHO_L** and **ALPHA_L** are both arrays; you can enter multiple values in each to run multiple simulations *simultaneously*.
