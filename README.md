@@ -2,7 +2,7 @@
 'Modeling Processes of Neighborhood Change' [Streamlined]
 
 ## Introduction
-> This streamlined version of the '[24Fa-MPONC]([url](https://github.com/VIP-SMUR/24Fa-MPONC))' research project simulates the impact of the Atlanta Beltline on the surrounding metropolitan area using game theory. The simulation models agent movement across county subdivisions, with agents seeking to move optimally (seeking 'attractive' county subdivisions) based on various factors.
+> This streamlined version of the '[24Fa-MPONC]([url](https://github.com/VIP-SMUR/24Fa-MPONC))' research project simulates the impact of the Atlanta Beltline on the surrounding metropolitan area using game theory. The simulation models agent movement across county subdivisions within the Atlanta-Sandy Springs-Roswell metro region, with agents seeking to move optimally (seeking 'attractive' county subdivisions) based on various factors.
 > 
 > **GOAL:** The goal of this project is to provide a streamlined, user-friendly parametric simulation tool for Dr. Kastner's research seminar at the Georgia Institute of Technology. Users (students) will be able to experiment, hypothesize, and investigate their own research questions related to urban development patterns, as well as practice using parametric research tools.
 <hr>
