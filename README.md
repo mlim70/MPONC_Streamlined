@@ -48,7 +48,7 @@ python main.py
 - Interval (# timesteps) to capture the frames of the GIF at
   - This simulation outputs a GIF to visualize results; this parameter decides how many frames should be in GIF (T_MAX_RANGE / BENCHMARK_INTERVALS)
  
-# TODO: insert picture of beltline; explain that RHO_L and ALPHA_L are lists
+# TODO: insert picture of beltline; explain that RHO_L and ALPHA_L are lists; mention that economic distribution is based of Atlanta
 
 ## Reference paper
 
