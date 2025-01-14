@@ -66,8 +66,6 @@ python main.py
 - All regions in between these values will have a score decreasing linearly from 1.0 to 0.2, depending on their distance away
   - Ex. If HIGH_BLSCORE_METERS = 1000 and LOW_BLSCORE_METERS = 5000, then all region centroids within 1km will have a 1.0 score; a centroid 3km away will have a 0.6 score; centroids 5km or more away will have a 0.2 score.
 
-# TODO: explain agent wealth distributions.
-
 ## Reference paper
 
 ```bibtex
