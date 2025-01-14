@@ -25,10 +25,10 @@ python main.py
 
 ### RHO_L
 - Population capacity
-  - *Note: It's possible that this capacity be exceeded; however, cost is then maximized.*
+  - It's possible that this capacity be exceeded; however, cost is then maximized.
 ### ALPHA_L
 - How much agents prioritize **proximity** (distance) to another centroid VS. **community** (how similar their income is to a region's average income).
-  - *Note: A sense of 'community' is measured by how similar their socioeconomic status (income) is to their region*
+  - Note: A sense of 'community' is measured by how similar their socioeconomic status (income) is to their region.
 ### T_MAX_RANGE
 - Duration of the simulation
   - Measured by 'timesteps'
