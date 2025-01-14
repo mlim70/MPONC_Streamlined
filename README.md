@@ -49,8 +49,8 @@ python main.py
       url={https://arxiv.org/abs/2401.03307}, 
 }
 ```
-
-# ORIGINAL 24Fa-MPONC README BELOW:
+> The remainder of this README is a copy of the original '24Fa-MPONC' GitHub's README.
+# 24Fa-MPONC README:
 
 ## Intro and Description
 This project is based on the reference paper created by Dr. Martinez and Dr. Zhao, which aims to address the following: 
