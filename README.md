@@ -32,22 +32,27 @@ python main.py
 #### ALPHA_L
 - How much agents prioritize **proximity** (distance) to another centroid VS. **community** (how similar their income is to a region's average income).
   - Note: A sense of 'community' is measured by how similar their socioeconomic status (income) is to their region.
+#### NUM_AGENTS
+- Number of agents
+- *NOTE: This affects simulation runtime greatly; I recommend NOT exceeding **1000** agents*
 #### T_MAX_RANGE
 - Duration of the simulation
   - Measured by 'timesteps'
   - 'Timestep' refers to a single instance agent action (relocation); 20,000 timesteps mean the agents relocate a total of 20,000 times during the simulation.*
-#### NUM_AGENTS
-- Number of agents
-- *NOTE: This affects simulation runtime greatly; I recommend NOT exceeding **1000** agents*
+#### BENCHMARK_INTERVALS
+- Interval (# timesteps) to capture the frames of the GIF at
+  - This simulation outputs a GIF to visualize results; this parameter decides how many frames should be in GIF (T_MAX_RANGE / BENCHMARK_INTERVALS)
 #### HIGH_BLSCORE_METERS & LOW_BLSCORE_METERS
 - **HIGH_BLSCORE_METERS**: All regions (their centroids) within this distance will have the highest "Beltline" score (1.0)
 - **LOW_BLSCORE_METERS**: All regions (their centroids) outside this distancew ill have the lowest "Beltline" score (0.1)
 - All regions in between these values will have a score decreasing linearly from 1.0 to 0.1, depending on their distance away
   - Ex. If HIGH_BLSCORE_METERS = 1000 and LOW_BLSCORE_METERS = 5000, then all region centroids within 1km will have a 1.0 score; a centroid 3km away will have a 0.55 score; centroids 5km or more away will have a 0.1 score.
-#### BENCHMARK_INTERVALS
-- Interval (# timesteps) to capture the frames of the GIF at
-  - This simulation outputs a GIF to visualize results; this parameter decides how many frames should be in GIF (T_MAX_RANGE / BENCHMARK_INTERVALS)
- 
+### How to Simulate the 'Beltline'
+- The Atlanta Beltline is a public transportation network, providing a higher quality of life and economic opportunities for locals. It's located in Atlanta, Fulton County, near the middle of the graph. Depending on your **HIGH_BLSCORE_METERS** and **LOW_BLSCORE_METERS** values, regions will have their centroids marked **green** depending on their proximity to the Atlanta Beltline. Agents are more likely to move to a region with a high *beltline* score.
+- Atlanta Beltline:
+<img src="./Images/Fulton-Atlanta Beltline Visual.png" width="400">
+<img src="./Images/AtlantaBeltlineVisual (1).jpg" width="400">
+
 # TODO: insert picture of beltline; explain that RHO_L and ALPHA_L are lists; mention that economic distribution is based of Atlanta
 
 ## Reference paper
