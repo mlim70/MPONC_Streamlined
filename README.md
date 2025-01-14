@@ -35,14 +35,15 @@ python main.py
   - 'Timestep' refers to a single instance agent action (relocation); 20,000 timesteps mean the agents relocate a total of 20,000 times during the simulation.*
 #### NUM_AGENTS
 - Number of agents
-#### BENCHMARK_INTERVALS
-- Interval (# timesteps) to capture the frames of the GIF at
-  - This simulation outputs a GIF to visualize results; decides how many frames should be in GIF (T_MAX_RANGE / BENCHMARK_INTERVALS)
+- *NOTE: This affects simulation runtime greatly; I recommend NOT exceeding **1000** agents*
 #### HIGH_BLSCORE_METERS & LOW_BLSCORE_METERS
 - **HIGH_BLSCORE_METERS**: All regions (their centroids) within this distance will have the highest "Beltline" score (1.0)
 - **LOW_BLSCORE_METERS**: All regions (their centroids) outside this distancew ill have the lowest "Beltline" score (0.1)
 - All regions in between these values will have a score decreasing linearly from 1.0 to 0.1, depending on their distance away
   - Ex. If HIGH_BLSCORE_METERS = 1000 and LOW_BLSCORE_METERS = 5000, then all region centroids within 1km will have a 1.0 score; a centroid 3km away will have a 0.55 score; centroids 5km or more away will have a 0.1 score.
+#### BENCHMARK_INTERVALS
+- Interval (# timesteps) to capture the frames of the GIF at
+  - This simulation outputs a GIF to visualize results; this parameter decides how many frames should be in GIF (T_MAX_RANGE / BENCHMARK_INTERVALS)
  
 # TODO: insert picture of beltline; explain that RHO_L and ALPHA_L are lists
 
