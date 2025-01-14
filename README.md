@@ -18,8 +18,9 @@
 
 ### Atlanta Beltline:
 <img src="./Images/Fulton-Atlanta Beltline Visual.png" width="300">
-- Your simulation output should look something like this, in GIF format:
-- <img src="./Images/CountySubdivisions_plt.png" width="300">
+
+### Example simulation GIF:
+- <img src="./Images/StreamlinedSimulationGif.gif" width="300">
 
 ## Setup
 
