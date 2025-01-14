@@ -42,7 +42,7 @@ python main.py
 - **HIGH_BLSCORE_METERS**: All regions (their centroids) within this distance will have the highest "Beltline" score (1.0)
 - **LOW_BLSCORE_METERS**: All regions (their centroids) outside this distancew ill have the lowest "Beltline" score (0.1)
 - All regions in between these values will have a score decreasing linearly from 1.0 to 0.1, depending on their distance away
-  - If HIGH_BLSCORE_METERS = 1000 and LOW_BLSCORE_METERS = 5000, then all region centroids within 1km will have a 1.0 score; a centroid 3km away will have a 0.55 score; centroids 5km or more away will have a 0.1 score.
+  - Ex. If HIGH_BLSCORE_METERS = 1000 and LOW_BLSCORE_METERS = 5000, then all region centroids within 1km will have a 1.0 score; a centroid 3km away will have a 0.55 score; centroids 5km or more away will have a 0.1 score.
  
 # TODO: insert picture of beltline; explain that RHO_L and ALPHA_L are lists
 
