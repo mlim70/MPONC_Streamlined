@@ -82,7 +82,8 @@ python main.py
 > The remainder of this README is a copy of the original '24Fa-MPONC' GitHub's README.
 >
 <hr>
-# 24Fa-MPONC README:
+
+# Original project's README:
 
 :   !!! abstract
 
