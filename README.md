@@ -6,7 +6,8 @@
 > 
 > **GOAL:** The goal of this project is to provide a streamlined, user-friendly parametric simulation tool for Dr. Kastner's research seminar at the Georgia Institute of Technology. Users (students) will be able to experiment, hypothesize, and investigate their own research questions related to urban development patterns, as well as practice using parametric research tools.
 <hr>
-- The full methodology, game theory, and findings of the full project can be found in the original [24Fa-MPONC]([url](https://github.com/VIP-SMUR/24Fa-MPONC)) repository; it is also pasted below after the *USER GUIDE* section, comprising the entire remainder of this README. 
+
+*The full methodology, game theory, and findings of the full project can be found in the original [24Fa-MPONC]([url](https://github.com/VIP-SMUR/24Fa-MPONC)) repository; it is also pasted below after the *USER GUIDE* section, comprising the entire remainder of this README.*
 
 
 
