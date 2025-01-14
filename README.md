@@ -10,6 +10,17 @@
 *The full methodology, game theory, and findings of the full project can be found in the original [24Fa-MPONC]([url](https://github.com/VIP-SMUR/24Fa-MPONC)) repository; it is also pasted below after the *USER GUIDE* section, comprising the entire remainder of this README.*
 
 # User Guide
+## Simulating the Atlanta Beltline
+- The Atlanta Beltline is a public transportation network, providing a higher quality of life and economic opportunities for locals. It's located in Atlanta, Fulton County. In this simulation, we model how individuals, or "agents", move between County Subdivisions depending on various factors including average wealth, distance, proximity to the Atlanta Beltline, population, etc. This simulation will output a GIF, showing a **graph** with **circles** in the center of each county subdivision. In each region, the number represents the region's population, and the region color represent the average wealth.
+- **Beltline score**: Depending on a region's proximity to the Atlanta Beltline (depending on your *HIGH_BLSCORE_METERS* and *LOW_BLSCORE_METERS* parameters, described below), regions will have their centroids shaded **green** depending on their proximity to the Atlanta Beltline (dark green = closer to the beltline -> higher '*beltline*' score). Agents are more likely to move to a region with a high *beltline* score.
+> Each region has a 'cost', ranging from 0 to 1. Agents are more likely to move to regions with lower cost.
+<hr>
+
+### Atlanta Beltline:
+<img src="./Images/Fulton-Atlanta Beltline Visual.png" width="300">
+- Your simulation output should look something like this, in GIF format:
+- <img src="./Images/CountySubdivisions_plt.png" width="300">
+
 ## Setup
 
 ```bash
@@ -20,7 +31,7 @@ pip install -r requirements.txt
 python main.py
 ```
 ## Project Settings
-> Each region has a 'cost', ranging from 0 to 1. Agents are more likely to move to regions with lower cost. Below are changeable parameters which decide how 'cost' is calculated, changing agent behavior.
+> Below are changeable parameters which decide how 'cost' is calculated, changing agent behavior.
 <hr>
 
 ### To change the below settings, simply open the 'config.py' file and edit the code at the top
@@ -47,11 +58,6 @@ python main.py
 - **LOW_BLSCORE_METERS**: All regions (their centroids) outside this distancew ill have the lowest "Beltline" score (0.1)
 - All regions in between these values will have a score decreasing linearly from 1.0 to 0.1, depending on their distance away
   - Ex. If HIGH_BLSCORE_METERS = 1000 and LOW_BLSCORE_METERS = 5000, then all region centroids within 1km will have a 1.0 score; a centroid 3km away will have a 0.55 score; centroids 5km or more away will have a 0.1 score.
-### How to Simulate the 'Beltline'
-- The Atlanta Beltline is a public transportation network, providing a higher quality of life and economic opportunities for locals. It's located in Atlanta, Fulton County, near the middle of the graph. Depending on your **HIGH_BLSCORE_METERS** and **LOW_BLSCORE_METERS** values, regions will have their centroids marked **green** depending on their proximity to the Atlanta Beltline. Agents are more likely to move to a region with a high *beltline* score.
-- Atlanta Beltline:
-<img src="./Images/Fulton-Atlanta Beltline Visual.png" width="400">
-<img src="./Images/AtlantaBeltlineVisual (1).jpg" width="400">
 
 # TODO: insert picture of beltline; explain that RHO_L and ALPHA_L are lists; mention that economic distribution is based of Atlanta
 
