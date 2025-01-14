@@ -23,17 +23,17 @@ python main.py
 > Each region has a 'cost', ranging from 0 to 1. Agents are more likely to move to regions with lower cost. Below are changeable parameters which decide how 'cost' is calculated, changing agent behavior.
 <hr>
 
-### RHO_L
+#### RHO_L
 - Population capacity
   - It's possible that this capacity be exceeded; however, cost is then maximized.
-### ALPHA_L
+#### ALPHA_L
 - How much agents prioritize **proximity** (distance) to another centroid VS. **community** (how similar their income is to a region's average income).
   - Note: A sense of 'community' is measured by how similar their socioeconomic status (income) is to their region.
-### T_MAX_RANGE
+#### T_MAX_RANGE
 - Duration of the simulation
   - Measured by 'timesteps'
   - 'Timestep' refers to a single instance agent action (relocation); 20,000 timesteps mean the agents relocate a total of 20,000 times during the simulation.*
-### NUM_AGENTS
+#### NUM_AGENTS
 - Number of agents
 
 ## Reference paper
