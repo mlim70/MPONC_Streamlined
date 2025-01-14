@@ -44,6 +44,10 @@ python main.py
 #### ALPHA_L
 - How much agents prioritize **proximity** (distance) to another centroid VS. **community** (how similar their income is to a region's average income).
   - Note: A sense of 'community' is measured by how similar their socioeconomic status (income) is to their region.
+> **RHO_L** and **ALPHA_L** are both arrays; you can enter multiple values in each to run multiple simulations *simultaneously*.
+> Ex. RHO_L = [2, 4]; ALPHA_L = [0.25, 0.75] will run four simulations with rho=2 alpha=0.25, rho=2 alpha=0.75; rho=4 alpha=0.25; and rho=4 alpha=0.75.
+<hr>
+
 #### NUM_AGENTS
 - Number of agents
 - *NOTE: This affects simulation runtime greatly; I recommend NOT exceeding **1000** agents*
@@ -60,7 +64,7 @@ python main.py
 - All regions in between these values will have a score decreasing linearly from 1.0 to 0.2, depending on their distance away
   - Ex. If HIGH_BLSCORE_METERS = 1000 and LOW_BLSCORE_METERS = 5000, then all region centroids within 1km will have a 1.0 score; a centroid 3km away will have a 0.6 score; centroids 5km or more away will have a 0.2 score.
 
-# TODO: insert picture of beltline; explain that RHO_L and ALPHA_L are lists; mention that economic distribution is based of Atlanta
+# TODO: explain agent wealth distributions.
 
 ## Reference paper
 
