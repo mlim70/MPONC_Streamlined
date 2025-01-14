@@ -23,6 +23,9 @@ python main.py
 > Each region has a 'cost', ranging from 0 to 1. Agents are more likely to move to regions with lower cost. Below are changeable parameters which decide how 'cost' is calculated, changing agent behavior.
 <hr>
 
+### To change the below settings, simply open the 'config.py' file and edit the code at the top
+- Don't forget to save the file in your IDE before running **main.py** (ctrl+s in some IDE's)
+
 #### RHO_L
 - Population capacity
   - It's possible that this capacity be exceeded; however, cost is then maximized.
