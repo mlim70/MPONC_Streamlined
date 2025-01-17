@@ -2,7 +2,7 @@
 'Modeling Processes of Neighborhood Change' [Streamlined]
 
 ## Introduction
-> This streamlined version of the '[24Fa-MPONC]([url](https://github.com/VIP-SMUR/24Fa-MPONC))' research project simulates the impact of the Atlanta Beltline on the surrounding metropolitan area using game theory. The simulation models agent movement across county subdivisions, with agents seeking to move optimally (seeking 'attractive' county subdivisions) based on various factors.
+> This streamlined version of the '[24Fa-MPONC]([url](https://github.com/VIP-SMUR/24Fa-MPONC))' research project simulates the impact of the Atlanta Beltline on the surrounding metropolitan area using game theory. The simulation models agent movement across county subdivisions within the Atlanta-Sandy Springs-Roswell metro region, with agents seeking to move optimally (seeking 'attractive' county subdivisions) based on various factors.
 > 
 > **GOAL:** The goal of this project is to provide a streamlined, user-friendly parametric simulation tool for Dr. Kastner's research seminar at the Georgia Institute of Technology. Users (students) will be able to experiment, hypothesize, and investigate their own research questions related to urban development patterns, as well as practice using parametric research tools.
 <hr>
@@ -10,17 +10,29 @@
 *The full methodology, game theory, and findings of the full project can be found in the original [24Fa-MPONC]([url](https://github.com/VIP-SMUR/24Fa-MPONC)) repository; it is also pasted below after the *USER GUIDE* section, comprising the entire remainder of this README.*
 
 # User Guide
+## Simulating the Atlanta Beltline
+- The **Atlanta Beltline** is a public transportation network, providing a higher quality of life and economic opportunities for locals. It's located in Atlanta, Fulton County. In this simulation, we model how individuals, or "agents", move between County Subdivisions depending on various factors including average wealth, distance, proximity to the Atlanta Beltline, population, etc. This simulation will output a GIF, showing a **graph** with **circles** in the center of each region. In each region, the number represents the region's population while the region color represent the average wealth.
+- **Beltline score**: Depending on a region's proximity to the Atlanta Beltline (determined by your *HIGH_BLSCORE_METERS* and *LOW_BLSCORE_METERS* parameters, described below), regions will have their centroids shaded **green** depending on their proximity to the Atlanta Beltline (dark green = closer to the beltline -> higher '*beltline*' score). A higher *beltline* score reduces the cost of moving to a region.
+> Each region has a 'cost', ranging from 0 to 1. Agents are more likely to move to regions with lower cost.
+<hr>
+
+### Atlanta Beltline:
+<img src="./Images/Fulton-Atlanta Beltline Visual.png" width="300">
+
+### Example simulation GIF:
+- <img src="./Images/Georgia_4_0.25_1000.gif" width="500">
+
 ## Setup
 
 ```bash
-cd modeling_processes_of_neighborhood_change_new
-conda create -n mponc python=3.12
+cd MPONC_Streamlined
+conda create -n mponc python=3.10.16
 conda activate mponc
 pip install -r requirements.txt
 python main.py
 ```
 ## Project Settings
-> Each region has a 'cost', ranging from 0 to 1. Agents are more likely to move to regions with lower cost. Below are changeable parameters which decide how 'cost' is calculated, changing agent behavior.
+> Below are changeable parameters which decide how 'cost' is calculated, changing agent behavior.
 <hr>
 
 ### To change the below settings, simply open the 'config.py' file and edit the code at the top
@@ -30,25 +42,29 @@ python main.py
 - Population capacity
   - It's possible that this capacity be exceeded; however, cost is then maximized.
 #### ALPHA_L
-- How much agents prioritize **proximity** (distance) to another centroid VS. **community** (how similar their income is to a region's average income).
-  - Note: A sense of 'community' is measured by how similar their socioeconomic status (income) is to their region.
+- How much agents prioritize **proximity** score (distance) VS. **community** score (socioeconomic belonging).
+  - Note: A region's '_proximity_' score is higher if it's close by; '_community_' score increases if an agent's income is similar to a region's average income.
+  - *Fun fact: Agents are assigned a random *income* based on the actual median incomes throughout Fulton and Dekalb counties !*
+> **RHO_L** and **ALPHA_L** are both arrays; you can enter multiple values in each to run multiple simulations *simultaneously*.
+> 
+> Ex. RHO_L = [2, 4]; ALPHA_L = [0.25, 0.75] will run four simulations with rho=2 alpha=0.25, rho=2 alpha=0.75; rho=4 alpha=0.25; and rho=4 alpha=0.75.
+<hr>
+
+#### NUM_AGENTS
+- Number of agents
+- *NOTE: This affects simulation runtime greatly; I recommend NOT exceeding **1000** agents*
 #### T_MAX_RANGE
 - Duration of the simulation
   - Measured by 'timesteps'
   - 'Timestep' refers to a single instance agent action (relocation); 20,000 timesteps mean the agents relocate a total of 20,000 times during the simulation.*
-#### NUM_AGENTS
-- Number of agents
-- *NOTE: This affects simulation runtime greatly; I recommend NOT exceeding **1000** agents*
-#### HIGH_BLSCORE_METERS & LOW_BLSCORE_METERS
-- **HIGH_BLSCORE_METERS**: All regions (their centroids) within this distance will have the highest "Beltline" score (1.0)
-- **LOW_BLSCORE_METERS**: All regions (their centroids) outside this distancew ill have the lowest "Beltline" score (0.1)
-- All regions in between these values will have a score decreasing linearly from 1.0 to 0.1, depending on their distance away
-  - Ex. If HIGH_BLSCORE_METERS = 1000 and LOW_BLSCORE_METERS = 5000, then all region centroids within 1km will have a 1.0 score; a centroid 3km away will have a 0.55 score; centroids 5km or more away will have a 0.1 score.
 #### BENCHMARK_INTERVALS
 - Interval (# timesteps) to capture the frames of the GIF at
   - This simulation outputs a GIF to visualize results; this parameter decides how many frames should be in GIF (T_MAX_RANGE / BENCHMARK_INTERVALS)
- 
-# TODO: insert picture of beltline; explain that RHO_L and ALPHA_L are lists; mention that economic distribution is based of Atlanta
+#### HIGH_BLSCORE_METERS & LOW_BLSCORE_METERS
+- **HIGH_BLSCORE_METERS**: All regions (their centroids) within this distance will have the highest "Beltline" score (1.0)
+- **LOW_BLSCORE_METERS**: All regions (their centroids) outside this distancew ill have the lowest "Beltline" score (0.2)
+- All regions in between these values will have a score decreasing linearly from 1.0 to 0.2, depending on their distance away
+  - Ex. If HIGH_BLSCORE_METERS = 1000 and LOW_BLSCORE_METERS = 5000, then all region centroids within 1km will have a 1.0 score; a centroid 3km away will have a 0.6 score; centroids 5km or more away will have a 0.2 score.
 
 ## Reference paper
 
@@ -64,7 +80,10 @@ python main.py
 }
 ```
 > The remainder of this README is a copy of the original '24Fa-MPONC' GitHub's README.
-# 24Fa-MPONC README:
+>
+<hr>
+
+# Original project's README:
 
 :   !!! abstract
 

@@ -1,5 +1,5 @@
 # helper.py
-from config import ZIP_URLS, T_MAX_RANGE, BENCHMARK_INTERVALS
+from config import ZIP_URLS, T_MAX_RANGE, BENCHMARK_INTERVALS, HIGH_BLSCORE_METERS, LOW_BLSCORE_METERS
 from pathlib import Path
 import os
 import numpy as np
@@ -7,7 +7,7 @@ import osmnx as ox
 import pickle
 
 """ Directories """
-BASE_DIR = Path("modeling_processes_of_neighborhood_change_new")
+BASE_DIR = Path.cwd()
 DATA_DIR = BASE_DIR / 'data'
 FIGURES_DIR = BASE_DIR / 'figures'
 FOLIUM_DIR = FIGURES_DIR / 'folium'
@@ -21,10 +21,11 @@ FIGURE_PKL_CACHE_DIR = CACHE_DIR / 'pkl_figures'
 GDF_CACHE_DIR = CACHE_DIR / 'gdfs'
 LAYER_CACHE_DIR = CACHE_DIR / 'layers'
 SAVED_IDS_CACHE_DIR = CACHE_DIR / 'saved_ids'
+SAVED_BLMETERS_CACHE_DIR = CACHE_DIR / 'saved_blmeters'
 CENSUS_DATA_CACHE_DIR = CACHE_DIR / 'census_data'
 
 for directory in [
-    FOLIUM_DIR, PLT_DIR, SAVED_IDS_CACHE_DIR, GIFS_CACHE_DIR, 
+    SAVED_BLMETERS_CACHE_DIR, FOLIUM_DIR, PLT_DIR, SAVED_IDS_CACHE_DIR, GIFS_CACHE_DIR, 
     LAYER_CACHE_DIR, GDF_CACHE_DIR, CACHE_DIR, DATA_DIR, FIGURES_DIR, AMTS_DENS_CACHE_DIR, 
     CENTROID_DIST_CACHE_DIR, OSMNX_CACHE_DIR, FIGURE_PKL_CACHE_DIR, CENSUS_DATA_CACHE_DIR
     ]:
@@ -34,11 +35,17 @@ for directory in [
 num_benchmarks = int(T_MAX_RANGE/BENCHMARK_INTERVALS)
 T_MAX_L = np.linspace(BENCHMARK_INTERVALS, T_MAX_RANGE, num_benchmarks, dtype=int)
 
+""" Create list of MAX_BLSCORE_METERS and LOW_BLSCORE_METERS """
+BLMETERS_LIST = []
+BLMETERS_LIST.append(HIGH_BLSCORE_METERS)
+BLMETERS_LIST.append(LOW_BLSCORE_METERS)
+
 """ Set OSMNX cache location """
 ox.settings.cache_folder = OSMNX_CACHE_DIR    # Set OSMnx cache directory
 
 """ File names """
-SAVED_IDS_FILE = SAVED_IDS_CACHE_DIR / f"saved_IDS.pkl"
+SAVED_IDS_FILE = SAVED_IDS_CACHE_DIR / "saved_IDS.pkl"
+SAVED_BLMETERS_FILE = SAVED_BLMETERS_CACHE_DIR / "saved_blmeters.pkl"
 GDF_CACHE_FILENAME = GDF_CACHE_DIR / "gdf.gpkg"
 GDF_NUM_GEOMETRIES_FILE = GDF_CACHE_DIR / "num_geometries"
 GDF_NUM_GEOMETRIES_INDIVIDUAL_FILE = GDF_CACHE_DIR / "num_geometries_individual"

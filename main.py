@@ -1,7 +1,7 @@
 # main.py
 
 from collections import defaultdict
-from helper import gdf_cache_filenames, GRAPH_FILE, GDF_CACHE_FILENAME, GIFS_CACHE_DIR, PLT_DIR, T_MAX_L, SAVED_IDS_FILE
+from helper import gdf_cache_filenames, GRAPH_FILE, GDF_CACHE_FILENAME, GIFS_CACHE_DIR, PLT_DIR, T_MAX_L, SAVED_IDS_FILE, SAVED_BLMETERS_FILE, BLMETERS_LIST
 from config import RUN_CALIBRATION, CTY_KEY, NUM_AGENTS, T_MAX_RANGE, PLOT_CITIES, RHO_L, ALPHA_L, AMENITY_TAGS, N_JOBS, GIF_NUM_PAUSE_FRAMES, GIF_FRAME_DURATION, ID_LIST, RELATION_IDS, viewData
 from file_download_manager import download_and_extract_layers_all
 from economic_distribution import economic_distribution
@@ -13,7 +13,7 @@ from simulation import run_simulation
 from visualization import plot_city
 from gif import process_pdfs_to_gifs
 from centroids import create_centroids
-from save_IDS import save_current_IDS, load_previous_IDS
+from save_values import save_current_values, load_previous_values
 from calibration import Calibration, MyRepair
 from beltline_score import fetch_beltline_nodes
 from pathlib import Path
@@ -51,20 +51,27 @@ def main():
     print(f"File download and extraction complete after {file_end_time - file_start_time:.2f} seconds.\n")
     print(f"*Number of tracts used to calculate endowment distribution: {n}")
     
-    # =============================
-    # CHECK IF REGIONS HAVE CHANGED
-    # =============================
-    regen_gdf_and_graph = False # Toggles True if counties have changed
+    # =========================================
+    # CHECK IF REGIONS OR BLMETERS HAVE CHANGED
+    # =========================================
+    regen_gdf = False # Toggles True if regions to simulate have changed OR beltline score radius has changed
+    regen_graph = False # Toggles True if regions to simulate have changed
     
-    if Path(SAVED_IDS_FILE).exists():
-        saved_IDS = load_previous_IDS(SAVED_IDS_FILE)
-        if not set(saved_IDS) == set(ID_LIST):
-            regen_gdf_and_graph = True
+    saved_IDS = load_previous_values(SAVED_IDS_FILE)
+    saved_BLMETERS = load_previous_values(SAVED_BLMETERS_FILE)
+    if set(saved_IDS) != set(ID_LIST) or not (GRAPH_FILE).exists():
+        regen_gdf = True
+        regen_graph = True
+    elif saved_BLMETERS != BLMETERS_LIST or not (GDF_CACHE_FILENAME).exists():
+        regen_gdf = True
     
-    save_current_IDS(ID_LIST, SAVED_IDS_FILE)
+    save_current_values(ID_LIST, SAVED_IDS_FILE)
+    save_current_values(BLMETERS_LIST, SAVED_BLMETERS_FILE)
     
-    if regen_gdf_and_graph:
+    if regen_graph == True:
         print("Regions have changed. Saving ID's and recreating Geodataframe and Graph.\n")
+    elif regen_gdf == True:
+        print("Beltline effect radius has changed. Saving HIGH & LOW BLSCORE_METERS and recreating Geodataframe.\n")
         
     # =======================
     # GDF FILE INITIALIZATION
@@ -78,13 +85,10 @@ def main():
         print("Failed to fetch BeltLine geometries.")
         
     # Create or load GDF
-    if Path(GDF_CACHE_FILENAME).exists():
-        if regen_gdf_and_graph:
-            gdf, num_geometries, num_geometries_individual = create_gdf(shapefile_paths, gdf_cache_filenames, beltline_geom)
-        else:
-            gdf, num_geometries, num_geometries_individual = load_gdf()
-    else:
+    if regen_gdf:
         gdf, num_geometries, num_geometries_individual = create_gdf(shapefile_paths, gdf_cache_filenames, beltline_geom)
+    else:
+        gdf, num_geometries, num_geometries_individual = load_gdf()
         
     print(f"[GDF] created w/ {num_geometries} regions.")
     for i in range(len(num_geometries_individual)):
@@ -102,7 +106,7 @@ def main():
     """ CHECK OVERLAPS """
     print_overlaps(gdf)
     
-    # [VIEW GRAPH] ===========================================================
+    # [VIEW GDF GRAPH] ===========================================================
     if viewData:
         matplotlib.use('TkAgg')
         gdf.plot()
@@ -123,16 +127,12 @@ def main():
     graph_start_time = time.time()
     print("Processing graph...")
 
-    if Path(GRAPH_FILE).exists():
-        if regen_gdf_and_graph:
-            g = create_graph(gdf)
-            save_graph(g, GRAPH_FILE)
-        else:
-            g = load_graph(GRAPH_FILE)
-            print(f"[GRAPH] loaded from cache..")
-    else:
+    if regen_graph:
         g = create_graph(gdf)
         save_graph(g, GRAPH_FILE)
+    else:
+        g = load_graph(GRAPH_FILE)
+        print(f"[GRAPH] loaded from cache..")
 
     graph_end_time = time.time()
     print(f"Graph generation complete after {graph_end_time - graph_start_time:.2f} seconds.\n")
