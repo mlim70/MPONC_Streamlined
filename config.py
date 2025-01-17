@@ -1,12 +1,14 @@
 # config.py
 
 """ Simulation Parameters """
-RHO_L = [2, 4, 8] # House capacity                                             # [1, 2, 4, 8] rho (house capacity)
-ALPHA_L = [0.25, 0.75] # Prioritize proximity vs. community    # [0.25, 0.75] lambda (agent preference; proximity vs. community)
-T_MAX_RANGE = 10000 # Total timesteps                               [20000] 
+RHO_L = [2, 4, 8] # Rho: House capacity (region population capacity)
+ALPHA_L = [0.25, 0.75] # Alpha: (agent preference; proximity vs. community)
+T_MAX_RANGE = 10000 # Total timesteps
 NUM_AGENTS = 1000 # Number of agents
-HIGH_BLSCORE_METERS = 1000
-LOW_BLSCORE_METERS = 5000
+
+HIGH_BLSCORE_METERS = 50000
+LOW_BLSCORE_METERS = 250000
+
 BENCHMARK_INTERVALS = 500 # Intervals (# timesteps) to capture frames of GIF
 
 
