@@ -94,16 +94,16 @@ class Agent:
         affordability = (self.dow >= self.city.dow_thr_array[u]).astype(float)          # Binary; 0 if (node is FULL) && (all inhabitants.endowment > self.endowment)
         community_cost = np.exp(-self.alpha * np.abs(self.dow - self.city.cmt_array[u]))# f(similarity of node.avg_endowment to self.endowment)
         accessibility = np.exp(-(1 - self.alpha) * self.city.amts_dens[u])              # f(amenity density)
-        upkeep = self.city.upk_array[u]                                                 # Binary; 0 if no inhabitants
-        beltline = self.city.beltline_score_array[u]                                       # Binary; 0 if not in Beltline
+        upkeep = self.city.upk_array[u]                                                 # Binary; 0 if no inhabitants #TODO
+        beltline = self.city.beltline_score_array[u]                                    # Scales from 0.2 to 1.0 depending on distance from Beltline
 
         # Mode-specific adjustments
-        base_location_cost = self.city.centroid_distances[self.prev_u, u]               # Normalized distance
-        mode_factor = 1.5 if self.mode == 'transit' else 1.0                            # Mode of transport cost - x1.5 multiplier if public transit vs. personal car
-        location_cost = base_location_cost * mode_factor                                # f(distance, mode_cost)
+        base_location_score = 1.0-(self.city.centroid_distances[self.prev_u, u])               # Normalized distance
+        mode_factor_score = 0.67 if self.mode == 'transit' else 1.0                           # Mode of transport score - x1.5 multiplier for personal car vs. transit
+        location_score = base_location_score * mode_factor_score                                # f(distance, mode_cost)
 
         # Combine costs according to FSM and mode
-        cost = 1 - (affordability * upkeep * beltline * location_cost * community_cost * accessibility)
+        cost = 1 - (affordability * upkeep * beltline * location_score * community_cost * accessibility)
         return cost
 
 
